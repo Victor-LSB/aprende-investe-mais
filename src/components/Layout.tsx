@@ -68,7 +68,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             {user ? (
               <>
                 <span className="hidden md:block text-sm text-muted-foreground">
-                  Olá, {user.name}
+                  Olá, {user?.user_metadata?.full_name?.split(' ').slice(0, 2).join(' ')}
                 </span>
                 <Button
                   variant="ghost"

@@ -29,13 +29,13 @@ const Home = () => {
       title: 'Aprenda a investir do zero',
       description: 'Comece sua jornada financeira com conteúdo simples e prático',
       icon: BookOpen,
-      color: 'from-primary to-primary-dark',
+      color: 'from-accent to-accent-light',
     },
     {
       title: 'Conquiste suas metas',
       description: 'Defina objetivos e acompanhe seu progresso financeiro',
       icon: Target,
-      color: 'from-accent to-accent-light',
+      color: 'from-primary to-primary-dark',
     },
     {
       title: 'Simule investimentos',
@@ -136,7 +136,7 @@ const Home = () => {
             <div className="flex items-center gap-3">
               <Award className="h-8 w-8 text-accent" />
               <div>
-                <h2 className="text-2xl font-bold">Olá, {user.name}! 👋</h2>
+                <h2 className="text-2xl font-bold">Olá, {user?.user_metadata?.full_name?.split(' ').slice(0, 2).join(' ')}! 👋</h2>
                 <p className="text-muted-foreground">
                   Continue sua jornada de aprendizado financeiro
                 </p>

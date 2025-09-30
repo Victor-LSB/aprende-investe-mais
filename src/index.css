@@ -44,13 +44,13 @@ All colors MUST be HSL.
     --radius: 0.75rem;
 
     /* Gradients for engaging design */
-    --gradient-primary: linear-gradient(135deg, hsl(255 70% 55%), hsl(280 65% 60%));
-    --gradient-success: linear-gradient(135deg, hsl(145 75% 45%), hsl(165 70% 50%));
-    --gradient-hero: linear-gradient(135deg, hsl(255 70% 55% / 0.95), hsl(280 65% 60% / 0.95));
+    --gradient-primary: linear-gradient(135deg, hsl(115, 70%, 55%), hsl(152, 93%, 59%));
+    --gradient-success: linear-gradient(135deg,hsl(115, 70%, 55%), hsl(152, 93%, 59%));
+    --gradient-hero: linear-gradient(135deg, hsl(115, 70%, 55%), hsl(152, 93%, 59%));
     
     /* Shadows */
-    --shadow-primary: 0 10px 30px -10px hsl(255 70% 55% / 0.3);
-    --shadow-card: 0 2px 8px hsl(240 10% 15% / 0.08);
+    --shadow-primary: 0 10px 30px -10px hsl(115, 70%, 55%), hsl(152, 93%, 59%);
+    --shadow-card: 0 2px 8px hsl(115, 70%, 55%), hsl(152, 93%, 59%);
   }
 
   .dark {
@@ -85,11 +85,11 @@ All colors MUST be HSL.
     --input: 240 8% 18%;
     --ring: 255 70% 60%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(255 70% 60%), hsl(280 65% 65%));
-    --gradient-success: linear-gradient(135deg, hsl(145 75% 50%), hsl(165 70% 55%));
-    --gradient-hero: linear-gradient(135deg, hsl(255 70% 60% / 0.95), hsl(280 65% 65% / 0.95));
+    --gradient-primary: linear-gradient(135deg, hsl(115, 70%, 55%), hsl(152, 93%, 59%));
+    --gradient-success: linear-gradient(135deg, hsl(115, 70%, 55%), hsl(152, 93%, 59%));
+    --gradient-hero: linear-gradient(135deg, hsl(115, 70%, 55%), hsl(152, 93%, 59%));
     
-    --shadow-primary: 0 10px 30px -10px hsl(255 70% 60% / 0.4);
+    --shadow-primary: 0 10px 30px -10px hsl(115, 70%, 55%), hsl(152, 93%, 59%);
     --shadow-card: 0 2px 8px hsl(0 0% 0% / 0.3);
   }
 }

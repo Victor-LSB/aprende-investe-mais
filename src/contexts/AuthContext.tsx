@@ -1,11 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-}
+import { Session, User } from '@supabase/supabase-js';
 
 interface AuthContextType {
   user: User | null;
@@ -22,74 +18,78 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session
-    const storedUser = localStorage.getItem('investe_user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+      setIsLoading(false);
+    };
+
+    getSession();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      subscription?.unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // Simulate API call
-      const users = JSON.parse(localStorage.getItem('investe_users') || '[]');
-      const foundUser = users.find(
-        (u: any) => u.email === email && u.password === password
-      );
-
-      if (foundUser) {
-        const userData = { id: foundUser.id, email: foundUser.email, name: foundUser.name };
-        setUser(userData);
-        localStorage.setItem('investe_user', JSON.stringify(userData));
-        toast.success('Login realizado com sucesso!');
-        return true;
-      } else {
-        toast.error('Email ou senha incorretos');
+      const { error } = await supabase.auth.signInWithPassword({ email, password});
+      if (error) {
+        toast.error(error.message);
         return false;
       }
+
+      toast.success('Login realizado com sucesso!');
+      return true;
     } catch (error) {
-      toast.error('Erro ao fazer login');
+      toast.error('Erro ao fazer login')
       return false;
     }
   };
 
   const register = async (email: string, password: string, name: string): Promise<boolean> => {
     try {
-      const users = JSON.parse(localStorage.getItem('investe_users') || '[]');
-      
-      // Check if user already exists
-      if (users.some((u: any) => u.email === email)) {
-        toast.error('Email já cadastrado');
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+          }
+        }
+      });
+
+      if (error) {
+        toast.error(error.message);
         return false;
       }
 
-      const newUser = {
-        id: Math.random().toString(36).substr(2, 9),
-        email,
-        password,
-        name,
-      };
+      if(data.user) {
+        const { error: updateError } = await supabase.from('profiles').update({ full_name: name }).eq('id', data.user.id)
+        if (updateError) {
+          console.error("Error updating user's name: ", updateError.message)
+        }
+      }
 
-      users.push(newUser);
-      localStorage.setItem('investe_users', JSON.stringify(users));
-
-      const userData = { id: newUser.id, email: newUser.email, name: newUser.name };
-      setUser(userData);
-      localStorage.setItem('investe_user', JSON.stringify(userData));
-      
-      toast.success('Conta criada com sucesso!');
+      toast.success('Conta criada com sucesso! Verifique seu e-mail para confirmação.')
       return true;
     } catch (error) {
-      toast.error('Erro ao criar conta');
+      toast.error('Erro ao criar a conta');
       return false;
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('investe_user');
-    toast.success('Logout realizado com sucesso');
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error('Erro ao fazer logout');
+    } else {
+      toast.success('Logout realizado com sucesso');
+    }
   };
 
   return (
@@ -104,5 +104,6 @@ export const useAuth = () => {
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
-  return context;
-};
+  return context
+}
+
