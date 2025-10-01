@@ -93,10 +93,10 @@ const Home = () => {
               {heroSlides.map((slide, index) => {
                 const Icon = slide.icon;
                 return (
-                  <CarouselItem key={index}>
-                    <div className="p-1">
-                      <Card className={`border-none shadow-lg bg-gradient-to-br ${slide.color}`}>
-                        <CardContent className="flex flex-col items-center justify-center p-12 md:p-16 text-white text-center">
+                  <CarouselItem key={index} className="flex">
+                    <div className="p-1 w-full">
+                      <Card className={`h-full border-none shadow-lg bg-gradient-to-br ${slide.color}`}>
+                        <CardContent className="h-full flex flex-col items-center justify-center p-12 md:p-16 text-white text-center">
                           <Icon className="h-16 w-16 mb-6" />
                           <h2 className="text-3xl md:text-5xl font-bold mb-4">
                             {slide.title}
