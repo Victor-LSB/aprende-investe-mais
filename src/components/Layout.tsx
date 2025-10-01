@@ -33,12 +33,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
+      <header className="sticky top-0 z-50 w-full border-b bg-card">
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary">
-              <span className="text-xl font-bold text-white">I+</span>
-            </div>
             <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
               Investe+
             </span>
@@ -138,9 +135,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary">
-                  <span className="text-sm font-bold text-white">I+</span>
-                </div>
                 <span className="font-bold bg-gradient-primary bg-clip-text text-transparent">
                   Investe+
                 </span>
@@ -174,7 +168,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </div>
           
           <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-            <p>© 2024 Investe+. Em conformidade com a LGPD.</p>
+            <p>© 2025 Investe+. Em conformidade com a LGPD.</p>
           </div>
         </div>
       </footer>

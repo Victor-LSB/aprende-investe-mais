@@ -1,15 +1,17 @@
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { 
-  Video, 
-  Target, 
-  Newspaper, 
-  Smartphone, 
+import {
+  Video,
+  Target,
+  Newspaper,
+  Smartphone,
   TrendingUp,
   PlayCircle,
   ArrowRight,
   Award,
-  BookOpen
+  BookOpen,
+  Clock,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
@@ -20,9 +22,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useAuth } from '@/contexts/AuthContext';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const Home = () => {
   const { user } = useAuth();
+  const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
 
   const heroSlides = [
     {
@@ -83,6 +87,24 @@ const Home = () => {
     },
   ];
 
+  const introVideos = [
+    {
+      title: 'O que não te contaram sobre Educação Financeira nas escolas!',
+      duration: '8:46',
+      embedUrl: 'https://www.youtube.com/embed/eCrNY-d0NMI', 
+    },
+    {
+      title: '7 erros que você não deve cometer com seu dinheiro aos 18 anos',
+      duration: '15:31',
+      embedUrl: 'https://www.youtube.com/embed/FO2giJU9w98',
+    },
+    {
+      title: 'Quanto investir para ganhar R$1.000 de renda passiva todo mês?',
+      duration: '19:56',
+      embedUrl: 'https://www.youtube.com/embed/ptlZSPNK9t4',
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section with Carousel */}
@@ -106,9 +128,9 @@ const Home = () => {
                           </p>
                           {!user && index === 0 && (
                             <Link to="/auth">
-                              <Button 
-                                size="lg" 
-                                variant="secondary" 
+                              <Button
+                                size="lg"
+                                variant="secondary"
                                 className="mt-8"
                               >
                                 Começar agora
@@ -187,27 +209,65 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Quick Start Video Section */}
+      {/* Quick Start Video Carousel Section */}
       <section className="py-16 bg-muted/30">
         <div className="container">
-          <Card className="max-w-4xl mx-auto shadow-lg">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl md:text-3xl">
-                Vídeo de introdução
-              </CardTitle>
-              <CardDescription>
-                Conheça o Investe+ em 2 minutos
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
-                <Button size="lg" className="gap-2">
-                  <PlayCircle className="h-6 w-6" />
-                  Assistir vídeo
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Comece por aqui
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Assista nossos vídeos de introdução e comece sua jornada.
+            </p>
+          </div>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full max-w-2xl mx-auto"
+          >
+            <CarouselContent>
+              {introVideos.map((video, index) => {
+                const videoId = video.embedUrl.split('/').pop()?.split('?')[0];
+                const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                
+                return (
+                  <CarouselItem key={index}>
+                    <div className="p-1">
+                      <Card
+                        className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+                        onClick={() => setPlayingVideoUrl(video.embedUrl)}
+                      >
+                        <CardContent className="p-0">
+                          <div className="aspect-video flex items-center justify-center relative overflow-hidden bg-slate-200">
+                            <img 
+                              src={thumbnailUrl} 
+                              alt={video.title} 
+                              className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
+                            <PlayCircle className="h-16 w-16 text-white absolute z-10 group-hover:scale-110 transition-transform" />
+                            <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              {video.duration}
+                            </div>
+                          </div>
+                          <div className="p-4">
+                            <CardTitle className="text-lg group-hover:text-accent transition-colors">
+                              {video.title}
+                            </CardTitle>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
 
@@ -230,6 +290,24 @@ const Home = () => {
           </div>
         </section>
       )}
+
+      {/* --- MODAL DO VÍDEO --- */}
+      <Dialog open={!!playingVideoUrl} onOpenChange={(isOpen) => !isOpen && setPlayingVideoUrl(null)}>
+        <DialogContent className="max-w-3xl p-0 border-0 bg-transparent">
+          <div className="aspect-video">
+            {playingVideoUrl && (
+              <iframe
+                className="w-full h-full rounded-lg"
+                src={`${playingVideoUrl}?autoplay=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

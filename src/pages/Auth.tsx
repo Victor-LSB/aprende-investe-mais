@@ -47,10 +47,6 @@ const Auth = () => {
     setIsLoading(true);
     const success = await login(loginEmail, loginPassword);
     setIsLoading(false);
-
-    if (success) {
-      navigate('/');
-    }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -72,12 +68,10 @@ const Auth = () => {
     }
 
     setIsLoading(true);
-    const success = await register(registerEmail, registerPassword, registerName);
+    await register(registerEmail, registerPassword, registerName);
     setIsLoading(false);
 
-    if (success) {
-      navigate('/');
-    }
+   
   };
 
   const handlePasswordRecovery = (e: React.FormEvent) => {
