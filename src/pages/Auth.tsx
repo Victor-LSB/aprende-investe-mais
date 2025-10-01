@@ -57,8 +57,8 @@ const Auth = () => {
       return;
     }
 
-    if (registerPassword.length < 6) {
-      toast.error('A senha deve ter pelo menos 6 caracteres');
+    if (registerPassword.length < 8) {
+      toast.error('A senha deve ter pelo menos 8 caracteres');
       return;
     }
 
@@ -135,9 +135,6 @@ const Auth = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2 mb-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-primary shadow-primary">
-              <span className="text-2xl font-bold text-white">I+</span>
-            </div>
           </Link>
           <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
             Investe+
@@ -168,7 +165,7 @@ const Auth = () => {
                     <Input
                       id="login-email"
                       type="email"
-                      placeholder="seu@email.com"
+                      placeholder="exemplo@email.com"
                       value={loginEmail}
                       onChange={(e) => setLoginEmail(e.target.value)}
                       required
@@ -179,7 +176,7 @@ const Auth = () => {
                     <Input
                       id="login-password"
                       type="password"
-                      placeholder="••••••"
+                      placeholder="••••••••"
                       value={loginPassword}
                       onChange={(e) => setLoginPassword(e.target.value)}
                       required
@@ -225,7 +222,7 @@ const Auth = () => {
                     <Input
                       id="register-email"
                       type="email"
-                      placeholder="seu@email.com"
+                      placeholder="exemplo@email.com"
                       value={registerEmail}
                       onChange={(e) => setRegisterEmail(e.target.value)}
                       required
@@ -236,11 +233,11 @@ const Auth = () => {
                     <Input
                       id="register-password"
                       type="password"
-                      placeholder="Mínimo 6 caracteres"
+                      placeholder="Mínimo 8 caracteres"
                       value={registerPassword}
                       onChange={(e) => setRegisterPassword(e.target.value)}
                       required
-                      minLength={6}
+                      minLength={8}
                     />
                   </div>
                   <div className="space-y-2">
@@ -248,7 +245,7 @@ const Auth = () => {
                     <Input
                       id="register-confirm-password"
                       type="password"
-                      placeholder="Digite a senha novamente"
+                      placeholder="Confirme a senha"
                       value={registerConfirmPassword}
                       onChange={(e) => setRegisterConfirmPassword(e.target.value)}
                       required
