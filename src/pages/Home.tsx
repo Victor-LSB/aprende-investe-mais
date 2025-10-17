@@ -190,7 +190,7 @@ const Home = () => {
                       <div className={`w-12 h-12 rounded-lg ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                         <Icon className="h-6 w-6" />
                       </div>
-                      <CardTitle className="group-hover:text-primary transition-colors">
+                      <CardTitle className="group-hover:text-accent transition-colors">
                         {feature.title}
                       </CardTitle>
                       <CardDescription>{feature.description}</CardDescription>

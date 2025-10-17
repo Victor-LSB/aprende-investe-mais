@@ -147,7 +147,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div>
               <h3 className="font-semibold mb-4">Navegação</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                {navigation.slice(0, 3).map((item) => (
+                {navigation.slice(0, 5).map((item) => (
                   <li key={item.href}>
                     <Link to={item.href} className="hover:text-primary transition-colors">
                       {item.name}
@@ -160,15 +160,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div>
               <h3 className="font-semibold mb-4">Equipe</h3>
               <p className="text-sm text-muted-foreground">
-                Vitor Cadorin Dalsasso<br />
                 Victor Lucas dos Santos Bento<br />
+                Vitor Cadorin Dalsasso<br />
                 Erik Malcher
               </p>
             </div>
           </div>
           
           <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-            <p>© 2025 Investe+. Em conformidade com a LGPD.</p>
+            <p>© 2025 Investe+</p>
           </div>
         </div>
       </footer>

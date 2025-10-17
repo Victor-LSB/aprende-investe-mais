@@ -10,6 +10,7 @@ import Auth from "./pages/Auth";
 import Videos from "./pages/Videos";
 import Goals from "./pages/Goals";
 import Apps from "./pages/Apps";
+import Simulator from "./pages/Simulator";
 import NotFound from "./pages/NotFound";
 import News from "./pages/News";
 
@@ -90,10 +91,7 @@ const App = () => (
               element={
                 <Layout>
                   <ProtectedRoute>
-                    <div className="container py-12">
-                      <h1 className="text-4xl font-bold mb-4">Simulador de Investimentos</h1>
-                      <p className="text-muted-foreground">Em desenvolvimento - Sprint 2</p>
-                    </div>
+                    <Simulator /> {}
                   </ProtectedRoute>
                 </Layout>
               }
