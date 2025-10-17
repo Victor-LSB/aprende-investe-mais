@@ -10,6 +10,7 @@ import Auth from "./pages/Auth";
 import Videos from "./pages/Videos";
 import Goals from "./pages/Goals";
 import NotFound from "./pages/NotFound";
+import News from "./pages/News";
 
 const queryClient = new QueryClient();
 
@@ -69,12 +70,7 @@ const App = () => (
               path="/noticias"
               element={
                 <Layout>
-                  <ProtectedRoute>
-                    <div className="container py-12">
-                      <h1 className="text-4xl font-bold mb-4">Notícias Financeiras</h1>
-                      <p className="text-muted-foreground">Em desenvolvimento - Sprint 2</p>
-                    </div>
-                  </ProtectedRoute>
+                  <News />
                 </Layout>
               }
             />
