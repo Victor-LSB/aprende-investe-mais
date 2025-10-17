@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Videos from "./pages/Videos";
 import Goals from "./pages/Goals";
+import Apps from "./pages/Apps";
 import NotFound from "./pages/NotFound";
 import News from "./pages/News";
 
@@ -79,10 +80,7 @@ const App = () => (
               element={
                 <Layout>
                   <ProtectedRoute>
-                    <div className="container py-12">
-                      <h1 className="text-4xl font-bold mb-4">Apps Recomendados</h1>
-                      <p className="text-muted-foreground">Em desenvolvimento - Sprint 2</p>
-                    </div>
+                    <Apps /> {/* <-- SUBSTITUA O CONTEÚDO AQUI */}
                   </ProtectedRoute>
                 </Layout>
               }
