@@ -80,7 +80,7 @@ const App = () => (
               element={
                 <Layout>
                   <ProtectedRoute>
-                    <Apps /> {/* <-- SUBSTITUA O CONTEÚDO AQUI */}
+                    <Apps /> {}
                   </ProtectedRoute>
                 </Layout>
               }
